@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Library Hours Component · Gavin Keenan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --color-deep-navy: #16262e;
+      --color-mist-blue: #c8cedd;
+      --color-white: #ffffff;
+      --color-electric-teal: #3ecfcf;
+      --color-slate: #6b7b8d;
+      --color-surface: #f4f6f8;
+      --font-sans: "Libre Franklin", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+      --text-h1: clamp(3.5rem, 8vw, 4rem);
+      --text-h2: clamp(2.25rem, 5vw, 2.5rem);
+      --text-h3: clamp(1.5rem, 3vw, 1.75rem);
+      --text-body: clamp(1rem, 2vw, 1.125rem);
+      --text-caption: clamp(0.75rem, 1.5vw, 0.875rem);
+
+      --weight-bold: 700;
+      --weight-semibold: 600;
+      --weight-medium: 500;
+      --weight-regular: 400;
+      --weight-light: 300;
+
+      --container-max: 72rem;
+      --header-height: 4rem;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      line-height: 1.6;
+      color: var(--color-deep-navy);
+      background: var(--color-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    /* —— Header —— */
+    .site-header {
+      padding-top: 0.75rem;
+      padding-bottom: 1.25rem;
+      color: var(--color-white);
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1.5rem;
+      min-height: 3.125rem;
+      padding-block: 0.625rem;
+      background: var(--color-deep-navy);
+      border-radius: 0.5rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: var(--weight-bold);
+      font-size: 1.125rem;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .logo svg path {
+      transition: fill 0.2s ease, stroke 0.2s ease;
+    }
+
+    .logo:hover svg>path {
+      fill: var(--color-electric-teal);
+    }
+
+    .logo:hover svg g path {
+      stroke: var(--color-electric-teal);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        gap: 1.25rem;
+      }
+    }
+
+    .nav a {
+      font-size: 0.9375rem;
+      font-weight: var(--weight-medium);
+      color: var(--color-white);
+      opacity: 0.92;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--color-electric-teal);
+      opacity: 1;
+      text-decoration: underline;
+      text-decoration-color: var(--color-electric-teal);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .header-contact {
+      margin-left: auto;
+      font-size: var(--text-caption);
+      font-weight: var(--weight-medium);
+      text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 14rem;
+    }
+
+    @media (min-width: 768px) {
+      .header-contact {
+        font-size: 0.875rem;
+        max-width: none;
+      }
+    }
+
+    .header-contact a {
+      color: var(--color-white);
+      opacity: 0.95;
+    }
+
+    .header-contact a:hover {
+      color: var(--color-electric-teal);
+    }
+
+    /* —— Hero —— */
+    .case-hero {
+      background: var(--color-deep-navy);
+      padding-block: clamp(4rem, 10vw, 7rem);
+      text-align: left;
+    }
+
+    .case-hero__inner {
+      max-width: 52rem;
+    }
+
+    .case-hero__eyebrow {
+      font-size: var(--text-caption);
+      font-weight: var(--weight-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-slate);
+      margin: 0 0 1.5rem;
+    }
+
+    .case-hero__title {
+      font-size: var(--text-h1);
+      font-weight: var(--weight-bold);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--color-white);
+      margin: 0 0 1.75rem;
+    }
+
+    .case-hero__title em {
+      font-style: normal;
+      color: var(--color-electric-teal);
+    }
+
+    .case-hero__subtitle {
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      color: var(--color-mist-blue);
+      margin: 0 0 2.5rem;
+      max-width: 48rem;
+      line-height: 1.65;
+    }
+
+    .case-hero__meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 2rem;
+    }
+
+    .case-hero__meta-label {
+      font-size: var(--text-caption);
+      font-weight: var(--weight-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-slate);
+      margin: 0 0 0.25rem;
+    }
+
+    .case-hero__meta-value {
+      font-size: var(--text-body);
+      font-weight: var(--weight-semibold);
+      color: var(--color-white);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .case-hero__image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* —— Shared section spacing —— */
+    .case-section {
+      padding-block: clamp(3rem, 8vw, 5rem);
+    }
+
+    /* —— Labels / headings —— */
+    .case-label {
+      font-size: var(--text-caption);
+      font-weight: var(--weight-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #16262e;
+      margin: 0 0 0.75rem;
+    }
+
+    .case-h2 {
+      font-size: var(--text-h2);
+      font-weight: var(--weight-semibold);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--color-deep-navy);
+      margin: 0 0 1.5rem;
+    }
+
+    .case-h3 {
+      font-size: var(--text-h3);
+      font-weight: var(--weight-semibold);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      color: var(--color-deep-navy);
+      margin: 0 0 1rem;
+    }
+
+    .case-body {
+      max-width: 44rem;
+    }
+
+    .case-body p {
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      color: var(--color-slate);
+      line-height: 1.75;
+      margin: 0 0 1.25rem;
+    }
+
+    .case-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .case-rule {
+      border: 0;
+      border-top: 1px solid rgba(22, 38, 46, 0.08);
+      margin: 0;
+    }
+
+    /* —— Design Brief —— */
+    .brief-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2rem, 5vw, 3.5rem);
+      align-items: start;
+    }
+
+    @media (min-width: 720px) {
+      .brief-grid {
+        grid-template-columns: 3fr 4fr;
+      }
+    }
+
+    .brief-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .brief-meta__item {
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      color: var(--color-slate);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .brief-meta__item strong {
+      font-weight: var(--weight-semibold);
+      color: var(--color-deep-navy);
+    }
+
+    .brief-problem {
+      background: var(--color-surface);
+      border-left: 3px solid var(--color-electric-teal);
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .brief-problem p {
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      color: var(--color-slate);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .brief-problem strong {
+      font-weight: var(--weight-semibold);
+      color: var(--color-deep-navy);
+    }
+
+    /* —— Image placeholders —— */
+    .img-placeholder {
+      width: 100%;
+      background: var(--color-surface);
+      border: 1px solid rgba(22, 38, 46, 0.08);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-caption);
+      font-weight: var(--weight-light);
+      color: var(--color-slate);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .img-placeholder--brief {
+      aspect-ratio: 16 / 10;
+      border-radius: 0.75rem;
+    }
+
+    .img-placeholder--wide {
+      aspect-ratio: 16 / 7;
+    }
+
+    .img-placeholder--tall {
+      aspect-ratio: 4 / 3;
+    }
+
+    .img-placeholder--two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .img-placeholder--two-col-item {
+      aspect-ratio: 4 / 3;
+      background: var(--color-surface);
+      border: 1px solid rgba(22, 38, 46, 0.08);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-caption);
+      font-weight: var(--weight-light);
+      color: var(--color-slate);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .img-placeholder--screens {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
+    .img-placeholder--screen-item {
+      aspect-ratio: 16 / 10;
+      background: var(--color-surface);
+      border: 1px solid rgba(22, 38, 46, 0.08);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-caption);
+      font-weight: var(--weight-light);
+      color: var(--color-slate);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* —— Lists —— */
+    .benchmark-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.75rem 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .benchmark-list li {
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      color: var(--color-slate);
+    }
+
+    .takeaway-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.25rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .takeaway-list li {
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      color: var(--color-slate);
+      padding-left: 1.25rem;
+      position: relative;
+      line-height: 1.65;
+    }
+
+    .takeaway-list li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--color-electric-teal);
+      font-weight: var(--weight-medium);
+    }
+
+    /* —— Footer —— */
+    .site-footer {
+      background: var(--color-deep-navy);
+      color: var(--color-white);
+      padding-block: 3rem 2rem;
+    }
+
+    .site-footer__top {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .site-footer__top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+    }
+
+    .site-footer__brand-name {
+      font-size: 1.25rem;
+      font-weight: var(--weight-bold);
+      margin: 0 0 0.25rem;
+    }
+
+    .site-footer__brand-role {
+      font-size: 0.9375rem;
+      font-weight: var(--weight-light);
+      color: var(--color-mist-blue);
+      margin: 0;
+    }
+
+    .site-footer__meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+      gap: 1.5rem 2.5rem;
+    }
+
+    .site-footer__label {
+      font-size: var(--text-caption);
+      font-weight: var(--weight-light);
+      text-transform: capitalize;
+      letter-spacing: 0.06em;
+      color: var(--color-slate);
+      margin: 0 0 0.35rem;
+    }
+
+    .site-footer__value {
+      font-size: var(--text-body);
+      font-weight: var(--weight-regular);
+      margin: 0;
+      color: var(--color-white);
+    }
+
+    .site-footer__value a:hover {
+      color: var(--color-electric-teal);
+    }
+
+    .site-footer__rule {
+      border: 0;
+      border-top: 1px solid rgba(200, 206, 221, 0.2);
+      margin: 2rem 0 1.25rem;
+    }
+
+    .site-footer__copy {
+      font-size: var(--text-caption);
+      font-weight: var(--weight-light);
+      color: var(--color-slate);
+      margin: 0;
+    }
+
+    /* —— View More Work —— */
+    .view-more {
+      padding-block: clamp(2.5rem, 6vw, 3.5rem);
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn--primary {
+      background: var(--color-deep-navy);
+      color: var(--color-white);
+      border-color: var(--color-deep-navy);
+    }
+
+    .btn--primary:hover {
+      background: var(--color-electric-teal);
+      border-color: var(--color-deep-navy);
+      color: var(--color-deep-navy);
+    }
+
+    .legacy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .legacy-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .process-cols {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-start;
+      margin-top: 1rem;
+    }
+
+    .process-cols__text {
+      flex: 1;
+    }
+
+    .process-cols__image {
+      flex: 0 0 50%;
+      max-width: 360px;
+    }
+
+    @media (max-width: 640px) {
+      .process-cols {
+        flex-direction: column;
+      }
+
+      .process-cols__image {
+        flex: none;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html">
+        <svg width="32" height="28" viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg"
+          aria-label="Gavin Keenan home">
+          <path
+            d="M7.52 20.7C6.22667 20.7 5.1 20.3933 4.14 19.78C3.18 19.1667 2.44 18.2933 1.92 17.16C1.41333 16.0267 1.16 14.6867 1.16 13.14C1.16 11.54 1.42667 10.1667 1.96 9.02C2.50667 7.87333 3.26667 6.99333 4.24 6.38C5.21333 5.76667 6.34667 5.46 7.64 5.46C8.61333 5.46 9.5 5.65333 10.3 6.04C11.1133 6.42667 11.7733 6.93333 12.28 7.56C12.8 8.17333 13.12 8.83333 13.24 9.54C13.2667 9.67333 13.2667 9.76667 13.24 9.82C13.2133 9.86 13.1533 9.89333 13.06 9.92L11.24 10.2C11.16 10.2133 11.1 10.2 11.06 10.16C11.0333 10.12 11.0133 10.0533 11 9.96C10.9067 9.45333 10.7067 9 10.4 8.6C10.0933 8.18667 9.7 7.86 9.22 7.62C8.75333 7.36667 8.21333 7.24 7.6 7.24C6.77333 7.24 6.06667 7.45333 5.48 7.88C4.89333 8.30667 4.44667 8.94667 4.14 9.8C3.84667 10.6533 3.7 11.7267 3.7 13.02C3.7 14.38 3.85333 15.4933 4.16 16.36C4.46667 17.2267 4.91333 17.8733 5.5 18.3C6.1 18.7133 6.82 18.92 7.66 18.92C8.23333 18.92 8.74 18.8267 9.18 18.64C9.62 18.4533 9.98667 18.2 10.28 17.88C10.5733 17.56 10.8 17.2133 10.96 16.84C11.12 16.4667 11.22 16.0933 11.26 15.72L11.28 14.72C11.3067 14.56 11.24 14.48 11.08 14.48H8.08C8 14.48 7.94 14.4667 7.9 14.44C7.86 14.4 7.84 14.3333 7.84 14.24V13.18C7.84 13.0333 7.91333 12.96 8.06 12.96H13.14C13.2733 12.96 13.3733 12.9933 13.44 13.06C13.5067 13.1133 13.54 13.1867 13.54 13.28V20.24C13.54 20.3333 13.5133 20.4 13.46 20.44C13.42 20.48 13.36 20.5 13.28 20.5H12.76C12.6667 20.5 12.58 20.4867 12.5 20.46C12.4333 20.42 12.38 20.3467 12.34 20.24L12.02 18.52C12.0067 18.4533 11.98 18.42 11.94 18.42C11.9133 18.42 11.8733 18.4533 11.82 18.52C11.58 18.8933 11.2667 19.2467 10.88 19.58C10.5067 19.9133 10.04 20.1867 9.48 20.4C8.93333 20.6 8.28 20.7 7.52 20.7ZM27.8741 20.16C27.9274 20.2533 27.9407 20.3333 27.9141 20.4C27.9007 20.4667 27.8407 20.5 27.7341 20.5H25.6541C25.4541 20.5 25.3141 20.4267 25.2341 20.28L21.1941 13.24C21.1141 13.1067 21.0074 13.12 20.8741 13.28L18.7341 15.74C18.6407 15.8467 18.5941 15.9733 18.5941 16.12V20.16C18.5941 20.3867 18.4674 20.5 18.2141 20.5H16.5141C16.3941 20.5 16.3074 20.48 16.2541 20.44C16.2007 20.3867 16.1741 20.3 16.1741 20.18V5.94C16.1741 5.75333 16.2607 5.66 16.4341 5.66H18.3541C18.5141 5.66 18.5941 5.74667 18.5941 5.92V12.84C18.5941 12.9333 18.6141 12.9867 18.6541 13C18.6941 13 18.7407 12.9667 18.7941 12.9L24.8141 5.88C24.8807 5.8 24.9474 5.74667 25.0141 5.72C25.0807 5.68 25.1807 5.66 25.3141 5.66H27.0141C27.1341 5.66 27.2141 5.69333 27.2541 5.76C27.3074 5.82667 27.2941 5.90667 27.2141 6L22.8141 10.98C22.7341 11.0733 22.7274 11.1867 22.7941 11.32L27.8741 20.16Z"
+            fill="white" />
+          <g clip-path="url(#clip0_logo_lib)">
+            <path d="M18 25.3636H30.3559V14" stroke="white" stroke-width="2.28042" />
+          </g>
+          <defs>
+            <clipPath id="clip0_logo_lib">
+              <rect width="13.5" height="12.5" fill="white" transform="translate(18 14)" />
+            </clipPath>
+          </defs>
+        </svg>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="about.html">About</a>
+      </nav>
+      <p class="header-contact">
+        <a href="mailto:Gavin.w.keenan@gmail.com">Gavin.w.keenan@gmail.com</a>
+      </p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 1. Hero -->
+    <section class="case-hero" aria-labelledby="case-title">
+      <div class="container">
+        <div class="case-hero__inner">
+          <div>
+            <p class="case-hero__eyebrow">UX Design &nbsp;·&nbsp; 2025</p>
+            <h1 id="case-title" class="case-hero__title">Drexel University <em>Libraries</em> Component Redesign</em>
+            </h1>
+            <p class="case-hero__subtitle">Redesigning two critical utility components; <em>Library search tool</em> and
+              <em>library hours</em>
+            <div class="case-hero__meta">
+              <div>
+                <p class="case-hero__meta-label">My Role</p>
+                <p class="case-hero__meta-value">UX/UI Designer</p>
+              </div>
+              <div>
+                <p class="case-hero__meta-label">Organization</p>
+                <p class="case-hero__meta-value">Drexel University Libraries</p>
+              </div>
+              <div>
+                <p class="case-hero__meta-label">Deliverables</p>
+                <p class="case-hero__meta-value">Component Design,<br>Interaction Design</p>
+              </div>
+              <div>
+                <p class="case-hero__meta-label">Live Site</p>
+                <p class="case-hero__meta-value"><a href="https://library.drexel.edu/" target="_blank" rel="noopener"
+                    style="color: var(--color-electric-teal); text-decoration: underline; text-underline-offset: 3px;">library.drexel.edu</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Design Brief -->
+    <section class="case-section container" aria-labelledby="brief-heading">
+      <div class="brief-grid">
+
+        <div>
+          <p class="case-label">Design Brief</p>
+          <h2>Library Search and Hours</h2>
+          <div class="brief-meta">
+            <p class="brief-meta__item">The legacy system required a redesign through migration to improve usability and
+              accessibility of these two components. We decided to update the components to better align with the
+              current design system.
+            </p>
+            <h3>Search</h3>
+            <p class="brief-meta__item">The project scope was a focused component redesign: a reusable hours display
+              module that could be embedded across the library website and adapt gracefully from desktop to mobile.</p>
+            <h3>Hours</h3>
+            <p class="brief-meta__item">Drexel University Libraries needed a reliable, scannable way to surface library
+              hours across their network of campus branches — a piece of critical utility information that students
+              checked frequently, especially during exam periods.</p>
+          </div>
+        </div>
+
+        <div>
+          <img src="Assets/Library/DU_LibraryHero1.png" alt="Drexel Libraries website — existing site"
+            style="width: 100%; height: auto; display: block; border-radius: 0.5rem; border: 1px solid rgba(22,38,46,0.12);" />
+          <figcaption
+            style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">New redesigned library
+              landing page</strong>
+          </figcaption>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="case-rule" />
+
+    <!-- The Problem -->
+    <section class="case-section container">
+      <h2>The Problem</h2>
+      <div class="case-body">
+        <h3>Search</h3>
+        <p>The legacy search display was inaccessible on mobile, contained six search options in tabular format. Tabular
+          search bar that gives the percieved function of filtering, but doesn't actually filter anything,
+          creating a cluttered interface.</p>
+      </div>
+      <div style="margin-top: 2.5rem;">
+        <img src="Assets/Library/DU_OldLibrary.png" alt="Drexel Libraries — existing hours display"
+          style="width: 100%; height: auto; display: block; border-radius: 0.5rem; border: 1px solid rgba(22,38,46,0.12);" />
+        <figcaption
+          style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+          <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Legacy search
+            component</strong>
+        </figcaption>
+      </div>
+      <div class="case-body" style="margin-top: 2rem;">
+        <h3 class="case-h3">Hours</h3>
+        <p>The legacy hours display prosed a unique design challenge, in that it attempted to display four colored bars
+          stacked inside each day cell. So every day square on the calendar is essentially a tiny mini-table comparing
+          four locations, and the whole month is that pattern repeated 30 times.</p>
+        <ul class="takeaway-list">
+          <li>On dekstop, Most people show up wanting to know one thing: "Is the library I care about open right now?"
+            This design instead shows them every library, every day, all month — whether they wanted that or not.
+          </li>
+          <li>It's visually exhausting, and buries the most important information.</li>
+          <li>On mobile, the legacy hours were inaccessible to all users, .</li>
+        </ul>
+      </div>
+      <div class="legacy-grid">
+        <div>
+          <img src="Assets/Library/DU_Legacy_Hours.png" alt="Legacy hours display — desktop"
+            style="width: 100%; height: auto; display: block; border-radius: 0.375rem; border: 1px solid #c8cdd2;" />
+          <figcaption
+            style="margin-top: 0.5rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Legacy hours
+              display on desktop</strong>
+          </figcaption>
+        </div>
+        <div>
+          <img src="Assets/Library/DU_Library_Mobile_Legacy.png" alt="Legacy library display — mobile"
+            style="width: 100%; height: auto; display: block; border-radius: 0.375rem; border: 1px solid #c8cdd2;" />
+          <figcaption
+            style="margin-top: 0.5rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">On mobile, the legacy
+              hours were inaccessible to all users</strong>
+          </figcaption>
+        </div>
+      </div>
+    </section>
+
+    <hr class="case-rule" />
+
+    <!-- 5. Design Exploration -->
+    <section class="case-section container" aria-labelledby="exploration-heading">
+      <p class="case-label">Process</p>
+      <h2 id="exploration-heading" class="case-h2">Design Exploration</h2>
+      <div class="case-body">
+        <h3 class="case-h3">Search</h3>
+        <p>Designing a search that leads the page. I designed it as the primary action — large, centered, and
+          unmistakable against the hero imagery. Surrounding clutter was pulled back or relocated so nothing competed
+          with that single, clear path forward. A few principles guided the direction:</p>
+        <ul class="takeaway-list">
+          <li><strong>One clear call to action.</strong></li>
+          <li><strong>Imagery that sets tone, not noise.</strong> </li>
+        </ul>
+      </div>
+
+
+      <div style="margin-top: 2.5rem;">
+        <img src="Assets/Library/DU_LibraryHero.png" alt="Drexel Libraries — redesigned hours display"
+          style="width: 100%; height: auto; display: block; border-radius: 0.5rem; border: 1px solid rgba(22,38,46,0.12);" />
+        <figcaption
+          style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+          <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Snapshot of the
+            'after'</strong>
+        </figcaption>
+      </div>
+    </section>
+
+    <hr class="case-rule" />
+
+    <!-- 6. Workflow -->
+    <section class="case-section container" aria-labelledby="workflow-heading">
+      <p class="case-label">Process</p>
+      <h2 id="workflow-heading" class="case-h2">Collaboration with Accessibility Team</h2>
+      <div class="process-cols">
+        <div class="process-cols__text">
+          <p
+            style="font-size: var(--text-body); font-weight: var(--weight-regular); color: var(--color-slate); line-height: 1.75; margin: 0 0 1rem;">
+            We aimed to support assistive tech users while also handling the realities of a small screen.</p>
+          <ul class="takeaway-list">
+            <li>Touch targets sized and spaced to stay comfortable for thumbs and users with limited dexterity.</li>
+            <li>Color and status cues paired with text and icons so meaning never relies on color alone.</li>
+            <li>Screen reader support so status is announced clearly — including live updates when hours shift, like
+              moving into "closing soon."</li>
+            <li>Flexible text and fallback states treated with the same care as the default view, so nothing gets
+              clipped, cut off, or leaves the user guessing.</li>
+          </ul>
+        </div>
+        <div class="process-cols__image">
+          <img src="Assets/Library/DU_LibraryHoursMobile.png" alt="Library hours component — mobile view"
+            style="width: 100%; height: auto; display: block; border-radius: 0.5rem; border: 1px solid rgba(22,38,46,0.12);" />
+          <figcaption
+            style="margin-top: 0.75rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Hours - Mobile View
+              Redesign</strong><br>
+            The hours component adapted for mobile — a compact, touch-friendly layout that surfaces today's hours
+            without
+            scrolling.
+          </figcaption>
+        </div>
+      </div>
+    </section>
+
+    <hr class="case-rule" />
+
+    <!-- 7. Main Takeaways -->
+    <section class="case-section container" aria-labelledby="takeaways-heading">
+      <p class="case-label">Findings</p>
+      <h2 id="takeaways-heading" class="case-h2">Main Takeaways</h2>
+      <div class="case-body">
+        <p>Usability testing of the prototype with twelve student ambassadors confirmed the component resolved the core
+          friction seen in the legacy component. Across the board, all participants found branch hours quickly and
+          confidently — desktop and mobile alike.</p>
+      </div>
+
+      <div style="margin-top: 2.5rem;">
+        <img src="Assets/Library/DU_LibraryHours.png" alt="Library hours component — desktop view"
+          style="width: 100%; height: auto; display: block; border-radius: 0.5rem; border: 1px solid rgba(22,38,46,0.12);" />
+        <figcaption
+          style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+          <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Hours Component</strong>
+          The redesigned hours component in context — displaying branch status and today's hours.
+        </figcaption>
+      </div>
+
+    </section>
+
+
+    <div class="view-more container">
+      <a class="btn btn--primary" href="index.html#work">View More Work</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div>
+          <p class="site-footer__brand-name">Gavin Keenan</p>
+          <p class="site-footer__brand-role">UX Designer</p>
+        </div>
+        <div class="site-footer__meta">
+          <div>
+            <p class="site-footer__label">Email</p>
+            <p class="site-footer__value">
+              <a href="mailto:Gavin.w.keenan@gmail.com">Gavin.w.keenan@gmail.com</a>
+            </p>
+          </div>
+          <div>
+            <p class="site-footer__label">Location</p>
+            <p class="site-footer__value">Philadelphia, PA</p>
+          </div>
+        </div>
+      </div>
+      <hr class="site-footer__rule" />
+      <p class="site-footer__copy">© 2026 Gavin Keenan. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
