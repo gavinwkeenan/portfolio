@@ -814,14 +814,26 @@
       margin-top: 2.5rem;
     }
 
-    .figures-row--70 { flex: 0 0 70%; margin: 0; }
-    .figures-row--30 { flex: 0 0 30%; margin: 0; }
-    .figures-row--50 { flex: 1 1 0; margin: 0; }
+    .figures-row--70 {
+      flex: 0 0 70%;
+      margin: 0;
+    }
+
+    .figures-row--30 {
+      flex: 0 0 30%;
+      margin: 0;
+    }
+
+    .figures-row--50 {
+      flex: 1 1 0;
+      margin: 0;
+    }
 
     @media (max-width: 640px) {
       .figures-row {
         flex-direction: column;
       }
+
       .figures-row--70,
       .figures-row--30,
       .figures-row--50 {
@@ -1121,25 +1133,30 @@
 
       <div class="figures-row" style="margin-top: clamp(2.5rem, 6vw, 4rem);">
         <figure class="figures-row--50">
-          <img
-            src="Assets/Moment/moment-analytics.png"
+          <img src="Assets/Moment/Moment-analytics.png"
             alt="Google Analytics dashboard showing event count for drexel.edu/moment over the last 12 months, with traffic spikes in mid-December and late March corresponding to enrollment email campaigns. Total views: 23,337."
-            style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);"
-          />
-          <figcaption style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
-            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Analytics snapshot — Last 12 months.</strong>
-            Traffic to <code>/moment/</code> is heavily email-driven, spiking in mid-December and late March — the two peak enrollment decision windows. The page earned <strong>23,337 views</strong> in the period, with <code>/moment/activities/</code> and <code>/moment/engineering/</code> as the most-visited subpages. These patterns directly informed content prioritization and the timing strategy for the Floating Action Bar.
+            style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);" />
+          <figcaption
+            style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Analytics snapshot —
+              Last 12 months.</strong>
+            Traffic to <code>/moment/</code> is heavily email-driven, spiking in mid-December and late March — the two
+            peak enrollment decision windows. The page earned <strong>23,337 views</strong> in the period, with
+            <code>/moment/activities/</code> and <code>/moment/engineering/</code> as the most-visited subpages. These
+            patterns directly informed content prioritization and the timing strategy for the Floating Action Bar.
           </figcaption>
         </figure>
         <figure class="figures-row--50">
-          <img
-            src="Assets/Moment/moment-email.png"
+          <img src="Assets/Moment/Moment-email.png"
             alt="Drexel enrollment email promoting the This Is Your Moment website, with quick-access buttons to Moment, Activities, Co-Op, Philadelphia, and Parents/Families subpages."
-            style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);"
-          />
-          <figcaption style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
-            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Example enrollment email.</strong>
-            Emails like this were the primary traffic driver to the site, linking directly to subpages via quick-access buttons. Understanding this email-to-site handoff shaped how we prioritized navigation and landing page clarity.
+            style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);" />
+          <figcaption
+            style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Example enrollment
+              email.</strong>
+            Emails like this were the primary traffic driver to the site, linking directly to subpages via quick-access
+            buttons. Understanding this email-to-site handoff shaped how we prioritized navigation and landing page
+            clarity.
           </figcaption>
         </figure>
       </div>
@@ -1244,46 +1261,48 @@
       </div>
       <div class="figures-row">
         <figure class="figures-row--70">
-          <img
-            src="Assets/Moment/moment_1.png"
+          <img src="Assets/Moment/moment_1.png"
             alt="Desktop wireframe of the This Is Your Moment landing page showing the hero image placeholder, 'THIS IS YOUR MOMENT / Welcome to Drexel University' heading, anchor navigation bar with Academics & Experience, Student Life, Philadelphia, and Anchor Header 4, introductory congratulations copy, and a Confirm Enrollment CTA button."
-            style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);"
-          />
-          <figcaption style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
-            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Desktop wireframe — hero &amp; anchor nav.</strong>
-            Early-stage wireframe establishing the page structure: full-bleed hero, sticky anchor navigation, welcome copy, and the primary Confirm Enrollment action.
+            style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);" />
+          <figcaption
+            style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6;">
+            <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Desktop wireframe — hero
+              &amp; anchor nav.</strong>
+            Early-stage wireframe establishing the page structure: full-bleed hero, sticky anchor navigation, welcome
+            copy, and the primary Confirm Enrollment action.
           </figcaption>
         </figure>
         <figure class="figures-row--30">
-          <img
-            src="Assets/Moment/moment_4.png"
+          <img src="Assets/Moment/moment_4.png"
             alt="Mobile wireframe of the This Is Your Moment page showing the Drexel header, hero image placeholder, 'Welcome to Drexel University' subtitle, sticky anchor navigation with Experiential Education, Student Life, and Philadelphia tabs, congratulations body copy, and the Floating Action Bar with an info icon and Confirm Your Enrollment CTA."
-            style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);"
-          />
+            style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);" />
         </figure>
       </div>
 
       <figure style="margin-top: 2.5rem;">
-        <img
-          src="Assets/Moment/moment_3.png"
+        <img src="Assets/Moment/moment_3.png"
           alt="Floating Action Button design exploration and handoff documentation — showing the original FAB, multiple iteration states including expanded drawer variants, button component specs, color tokens (gradient yellow to orange, navy), and final desktop and mobile design handoff screens."
-          style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);"
-        />
-        <figcaption style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6; max-width: 44rem;">
-          <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">FAB design exploration &amp; handoff.</strong>
-          Iterations of the Floating Action Bar from original concept through final spec — covering drawer states, button hierarchy, color tokens, and annotated handoff screens for both desktop and mobile breakpoints.
+          style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);" />
+        <figcaption
+          style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6; max-width: 44rem;">
+          <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">FAB design exploration
+            &amp; handoff.</strong>
+          Iterations of the Floating Action Bar from original concept through final spec — covering drawer states,
+          button hierarchy, color tokens, and annotated handoff screens for both desktop and mobile breakpoints.
         </figcaption>
       </figure>
 
       <figure style="margin-top: 2.5rem;">
-        <img
-          src="Assets/Moment/moment_5.png"
+        <img src="Assets/Moment/moment_5.png"
           alt="Annotated mobile wireframe progression showing the single-page scroller template: natural scroll navigation, sliding nav becoming sticky, anchor link activation, and right-arrow state on maximum scroll."
-          style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);"
-        />
-        <figcaption style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6; max-width: 44rem;">
-          <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Mobile interaction flow.</strong>
-          Annotated wireframes illustrating the new single-page scroller template across four states: natural scroll, sticky navigation, anchor link activation on "Current Partners," and the right-arrow state at maximum scroll depth.
+          style="width: 100%; border-radius: 0.75rem; border: 1px solid rgba(22,38,46,0.08);" />
+        <figcaption
+          style="margin-top: 1rem; font-size: var(--text-caption); color: var(--color-slate); line-height: 1.6; max-width: 44rem;">
+          <strong style="color: var(--color-deep-navy); font-weight: var(--weight-semibold);">Mobile interaction
+            flow.</strong>
+          Annotated wireframes illustrating the new single-page scroller template across four states: natural scroll,
+          sticky navigation, anchor link activation on "Current Partners," and the right-arrow state at maximum scroll
+          depth.
         </figcaption>
       </figure>
     </section>
